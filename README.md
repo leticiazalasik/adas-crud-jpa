@@ -3,7 +3,7 @@
 Este repositório é uma prática feita em sala de aula para exercitar o CRUD com spring e JPA. 
 
 O que esse projeto contém? 
-...
+... <br> <br>
 
 ## 👨‍💻️ Tecnologias Utilizadas
 Esse projeto foi criado utilizando as tecnologias:
