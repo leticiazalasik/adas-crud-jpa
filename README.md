@@ -8,7 +8,7 @@ O que esse projeto contém?
 ## 👨‍💻️ Tecnologias Utilizadas
 Esse projeto foi criado utilizando as tecnologias:
 #### :small_blue_diamond: IntelliJ - JAVA, spring 
-#### :small_blue_diamond: Postgres - SQL
+#### :small_blue_diamond: Postgres - SQL <br> 
 
 
 
