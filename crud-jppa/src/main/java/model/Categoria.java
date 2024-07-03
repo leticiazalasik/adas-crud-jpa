@@ -28,8 +28,10 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    
+    @NonNull
     private String nome;
+
+    @NonNull
     private boolean status;
 
 }
