@@ -1,11 +1,13 @@
-package service;
+package com.adas.crud_jppa.service;
 
-import model.Categoria;
+import com.adas.crud_jppa.model.Categoria;
 import org.springframework.beans.factory.annotation.Autowired;
-import repository.CategoriaRepository;
+import org.springframework.stereotype.Service;
+import com.adas.crud_jppa.repository.CategoriaRepository;
 
 import java.util.List;
 
+@Service
 public class CategoriaService {
 
     @Autowired

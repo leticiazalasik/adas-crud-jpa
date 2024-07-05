@@ -1,4 +1,4 @@
-package model;
+package com.adas.crud_jppa.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +14,8 @@ import lombok.*;
 
 //Define os getters e setters automaticamente
 //Ou pode substituir pela anotação @Data
-@Getter @Setter
+@Getter
+@Setter
 
 //Gera todas as possibilidades de construtores que nao sao os vazios ou os totalmente cheios
 @Builder
@@ -22,16 +23,17 @@ import lombok.*;
 //Gera automaticamente uma tabela no banco de dados, tendo as colunas dessa tabela de forma
 // espelhada com os atributos da classe categoria
 @Entity
-public class Categoria {
-
+public class Caixa {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NonNull
-    private String nome;
-
-    @NonNull
     private boolean status;
 
+    @NonNull
+    private Double saldo;
+
+    @NonNull
+    private Double limite;
 }
