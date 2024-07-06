@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/caixa")
 public class CaixaController {
@@ -16,16 +18,82 @@ public class CaixaController {
     private CaixaService caixaService;
 
     @PostMapping("/novo")
-    public ResponseEntity<Caixa> cadastrarNovoCaixa(@RequestBody Produto produto) {
+    public ResponseEntity<Caixa> cadastrarNovoCaixa(@RequestBody Caixa caixa) {
 
-        return ResponseEntity.ok(produtoService.salvar(produto));
+        return ResponseEntity.ok(caixaService.salvar(caixa));
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Caixa>abrir(){
+        @GetMapping("/todos")
+        public ResponseEntity<List<Caixa>> listarTodosCaixas() {
 
-        if (caixa. == null){
+            return ResponseEntity.ok(caixaService.buscarTodos());
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<Caixa>buscarPorId(@PathVariable int id) {
+            Caixa caixaEncontrado = caixaService.buscarPorId(id);
+
+            if (caixaEncontrado == null) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(caixaEncontrado);
+        }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Caixa>alterar(@RequestBody Caixa caixa, @PathVariable int id){
+        Caixa caixaEncontrado = caixaService.buscarPorId(id);
+
+        if (caixaEncontrado == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(produtoService.salvar(produto));
+        return ResponseEntity.ok(caixaService.salvar(caixa));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Caixa> excluir (@PathVariable int id){
+        Caixa caixaEncontrado = caixaService.buscarPorId(id);
+
+        if (caixaEncontrado == null){
+            return ResponseEntity.notFound().build();
+        }
+        caixaService.excluir(caixaEncontrado);
+        return ResponseEntity.ok(caixaEncontrado);
+
+    }
+    @PutMapping("/abrir")
+    public ResponseEntity<Caixa>abrirCaixa(@RequestBody int id){
+
+        Caixa caixaEncontrado =caixaService.buscarPorId(id);
+
+        if (caixaEncontrado == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        if (caixaEncontrado.isStatus() == true){
+            return ResponseEntity.notFound().build();
+        }
+        caixaEncontrado.setStatus(true);
+        return ResponseEntity.ok(caixaService.salvar(caixaEncontrado));
+    }
+
+    @PutMapping("/fechar")
+    public ResponseEntity<Caixa>fecharCaixa(@RequestBody int id ){
+
+        Caixa caixaEncontrado =caixaService.buscarPorId(id);
+
+        if (caixaEncontrado == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        if (caixaEncontrado.isStatus() == false){
+            return ResponseEntity.notFound().build();
+        }
+        caixaEncontrado.setStatus(false);
+        return ResponseEntity.ok(caixaService.salvar(caixaEncontrado));
+    }
+
+
+
+
 }
+
+
