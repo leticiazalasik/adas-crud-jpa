@@ -6,21 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.*;
 
-//Define automaticamente o construturo vazio da classe
 @NoArgsConstructor
 
-//Define automaticamente o construtor com TODOS os atributos da classe
 @AllArgsConstructor
 
-//Define os getters e setters automaticamente
-//Ou pode substituir pela anotação @Data
 @Getter @Setter
 
-//Gera todas as possibilidades de construtores que nao sao os vazios ou os totalmente cheios
 @Builder
 
-//Gera automaticamente uma tabela no banco de dados, tendo as colunas dessa tabela de forma
-// espelhada com os atributos da classe categoria
 @Entity
 public class Produto {
 
@@ -35,6 +28,6 @@ public class Produto {
     private Double preco;
 
     @NonNull
-    private int quantidade;
+    private Integer quantidade;
 
 }

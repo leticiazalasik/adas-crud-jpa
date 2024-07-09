@@ -2,13 +2,16 @@ package com.adas.crud_jppa.controller;
 
 import com.adas.crud_jppa.model.Caixa;
 import com.adas.crud_jppa.model.Produto;
+import com.adas.crud_jppa.repository.CaixaRepository;
 import com.adas.crud_jppa.service.CaixaService;
 import com.adas.crud_jppa.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.ListResourceBundle;
 
 @RestController
 @RequestMapping("/caixa")
@@ -16,6 +19,20 @@ public class CaixaController {
 
     @Autowired
     private CaixaService caixaService;
+
+    @Autowired
+    private CaixaRepository caixaRepository;
+
+    private List<Double>entradas=new ArrayList<>();
+
+    public void entradas (double valor){
+        entradas.add(valor);
+    }
+
+    @GetMapping("/entradas")
+    public List<Double>getEntradas(){
+        return entradas;
+    }
 
     @PostMapping("/novo")
     public ResponseEntity<Caixa> cadastrarNovoCaixa(@RequestBody Caixa caixa) {

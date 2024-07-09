@@ -20,21 +20,15 @@ public class ProdutoController {
     @Autowired
         private ProdutoService produtoService;
 
-    @Autowired
-    private CaixaService caixaService;
-
-    private List<Double> entradas = new ArrayList<>();
-
-
     @GetMapping("/todos")
-        public ResponseEntity<List<Produto>> listarTodosProdutos() {
+        public ResponseEntity<List<Produto>> findAll() {
 
-            return ResponseEntity.ok(produtoService.buscarTodos());
+            return ResponseEntity.ok(produtoService.findAll());
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<Produto>buscarPorId(@PathVariable int id){
-            Produto produtoEncontrado=produtoService.buscarPorId(id);
+        public ResponseEntity<Produto>findById(@PathVariable int id){
+            Produto produtoEncontrado=produtoService.findById(id);
 
             if(produtoEncontrado==null){
                 return ResponseEntity.notFound().build();
@@ -43,30 +37,30 @@ public class ProdutoController {
         }
 
         @PostMapping("/novo")
-        public ResponseEntity<Produto> cadastrarNovoProduto(@RequestBody Produto produto) {
+        public ResponseEntity<Produto> add(@RequestBody Produto produto) {
 
-            return ResponseEntity.ok(produtoService.salvar(produto));
+            return ResponseEntity.ok(produtoService.save(produto));
         }
 
 
         @PutMapping("/{id}")
-        public ResponseEntity<Produto>alterar(@RequestBody Produto produto, @PathVariable int id){
-            Produto produtoEncontrado = produtoService.buscarPorId(id);
+        public ResponseEntity<Produto>update(@RequestBody Produto produto, @PathVariable int id){
+            Produto produtoEncontrado = produtoService.findById(id);
 
             if (produtoEncontrado == null){
                 return ResponseEntity.notFound().build();
             }
-            return ResponseEntity.ok(produtoService.salvar(produto));
+            return ResponseEntity.ok(produtoService.save(produto));
         }
 
         @DeleteMapping("/{id}")
-        public ResponseEntity<Produto> excluir (@PathVariable int id){
-            Produto produtoEncontrado = produtoService.buscarPorId(id);
+        public ResponseEntity<Produto>delete (@PathVariable int id){
+            Produto produtoEncontrado = produtoService.findById(id);
 
             if (produtoEncontrado == null){
                 return ResponseEntity.notFound().build();
             }
-            produtoService.excluir(produtoEncontrado);
+            produtoService.delete(produtoEncontrado);
             return ResponseEntity.ok(produtoEncontrado);
 
         }
@@ -74,7 +68,7 @@ public class ProdutoController {
     @PostMapping("/vender/{quantidade}/{id}")
     public ResponseEntity<Produto> venderProduto(@RequestBody  int idCaixa, @PathVariable int quantidade, @PathVariable  int id) {
 
-        Produto produtoEncontrado=produtoService.buscarPorId(id);
+        Produto produtoEncontrado=produtoService.findById(id);
 
         if (produtoEncontrado==null){
             return ResponseEntity.notFound().build();
@@ -100,13 +94,13 @@ public class ProdutoController {
         caixaService.salvar(caixaEncontrado);
         //caixaService.registrarMovimentacao(valorVenda);
 
-        return ResponseEntity.ok(produtoService.salvar(produtoEncontrado));
+        return ResponseEntity.ok(produtoService.save(produtoEncontrado));
     }
 
     @PostMapping("/comprar/{quantidade}/{id}")
     public ResponseEntity<Produto> comprarProduto(@RequestBody int idCaixa, @PathVariable int quantidade, @PathVariable  int id) {
 
-        Produto produtoEncontrado=produtoService.buscarPorId(id);
+        Produto produtoEncontrado=produtoService.findById(id);
 
         if (produtoEncontrado==null){
             return ResponseEntity.notFound().build();
@@ -127,7 +121,9 @@ public class ProdutoController {
         caixaEncontrado.setSaldo(caixaEncontrado.getSaldo()-valorCompra);
         caixaService.salvar(caixaEncontrado);
 
-        return ResponseEntity.ok(produtoService.salvar(produtoEncontrado));
+        caixaController.entradas(valorCompra);
+
+        return ResponseEntity.ok(produtoService.save(produtoEncontrado));
     }
 
 
