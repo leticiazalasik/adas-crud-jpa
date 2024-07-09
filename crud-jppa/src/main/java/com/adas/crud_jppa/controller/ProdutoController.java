@@ -65,66 +65,6 @@ public class ProdutoController {
 
         }
 
-    @PostMapping("/vender/{quantidade}/{id}")
-    public ResponseEntity<Produto> venderProduto(@RequestBody  int idCaixa, @PathVariable int quantidade, @PathVariable  int id) {
-
-        Produto produtoEncontrado=produtoService.findById(id);
-
-        if (produtoEncontrado==null){
-            return ResponseEntity.notFound().build();
-        }
-
-        if (produtoEncontrado.getQuantidade()<quantidade ) {
-            return ResponseEntity.notFound().build();
-
-        }
-    produtoEncontrado.setQuantidade(produtoEncontrado.getQuantidade()-quantidade);
-        double valorVenda= produtoEncontrado.getPreco()*quantidade;
-
-        Caixa caixaEncontrado =caixaService.buscarPorId(idCaixa);
-        if (caixaEncontrado==null){
-            return ResponseEntity.notFound().build();
-
-        }
-        if(caixaEncontrado.isStatus()==false){
-            return ResponseEntity.notFound().build();
-
-        }
-        caixaEncontrado.setSaldo(caixaEncontrado.getSaldo()+valorVenda);
-        caixaService.salvar(caixaEncontrado);
-        //caixaService.registrarMovimentacao(valorVenda);
-
-        return ResponseEntity.ok(produtoService.save(produtoEncontrado));
-    }
-
-    @PostMapping("/comprar/{quantidade}/{id}")
-    public ResponseEntity<Produto> comprarProduto(@RequestBody int idCaixa, @PathVariable int quantidade, @PathVariable  int id) {
-
-        Produto produtoEncontrado=produtoService.findById(id);
-
-        if (produtoEncontrado==null){
-            return ResponseEntity.notFound().build();
-        }
-
-        Caixa caixaEncontrado =caixaService.buscarPorId(idCaixa);
-        if (caixaEncontrado==null){
-            return ResponseEntity.notFound().build();
-
-        }
-        if(caixaEncontrado.isStatus()==false){
-            return ResponseEntity.notFound().build();
-
-        }
-        produtoEncontrado.setQuantidade(produtoEncontrado.getQuantidade()+quantidade);
-        double valorCompra= produtoEncontrado.getPreco()*quantidade;
-
-        caixaEncontrado.setSaldo(caixaEncontrado.getSaldo()-valorCompra);
-        caixaService.salvar(caixaEncontrado);
-
-        caixaController.entradas(valorCompra);
-
-        return ResponseEntity.ok(produtoService.save(produtoEncontrado));
-    }
 
 
     }

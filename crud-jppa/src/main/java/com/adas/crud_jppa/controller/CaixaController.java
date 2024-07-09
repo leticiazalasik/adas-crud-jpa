@@ -23,31 +23,20 @@ public class CaixaController {
     @Autowired
     private CaixaRepository caixaRepository;
 
-    private List<Double>entradas=new ArrayList<>();
-
-    public void entradas (double valor){
-        entradas.add(valor);
-    }
-
-    @GetMapping("/entradas")
-    public List<Double>getEntradas(){
-        return entradas;
-    }
-
     @PostMapping("/novo")
-    public ResponseEntity<Caixa> cadastrarNovoCaixa(@RequestBody Caixa caixa) {
+    public ResponseEntity<Caixa> add(@RequestBody Caixa caixa) {
 
-        return ResponseEntity.ok(caixaService.salvar(caixa));
+        return ResponseEntity.ok(caixaService.save(caixa));
     }
         @GetMapping("/todos")
-        public ResponseEntity<List<Caixa>> listarTodosCaixas() {
+        public ResponseEntity<List<Caixa>> findAll() {
 
-            return ResponseEntity.ok(caixaService.buscarTodos());
+            return ResponseEntity.ok(caixaService.findAll());
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<Caixa>buscarPorId(@PathVariable int id) {
-            Caixa caixaEncontrado = caixaService.buscarPorId(id);
+        public ResponseEntity<Caixa>findById(@PathVariable int id) {
+            Caixa caixaEncontrado = caixaService.findById(id);
 
             if (caixaEncontrado == null) {
                 return ResponseEntity.notFound().build();
@@ -56,56 +45,58 @@ public class CaixaController {
         }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Caixa>alterar(@RequestBody Caixa caixa, @PathVariable int id){
-        Caixa caixaEncontrado = caixaService.buscarPorId(id);
+    public ResponseEntity<Caixa>update(@RequestBody Caixa caixa, @PathVariable int id){
+        Caixa caixaEncontrado = caixaService.findById(id);
 
         if (caixaEncontrado == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(caixaService.salvar(caixa));
+        return ResponseEntity.ok(caixaService.save(caixa));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Caixa> excluir (@PathVariable int id){
-        Caixa caixaEncontrado = caixaService.buscarPorId(id);
+        Caixa caixaEncontrado = caixaService.findById(id);
 
         if (caixaEncontrado == null){
             return ResponseEntity.notFound().build();
         }
-        caixaService.excluir(caixaEncontrado);
+        caixaService.delete(caixaEncontrado);
         return ResponseEntity.ok(caixaEncontrado);
 
     }
-    @PutMapping("/abrir")
-    public ResponseEntity<Caixa>abrirCaixa(@RequestBody int id){
+    @PutMapping("/abrir/{id}")
+    public ResponseEntity<String>abrirCaixa(@PathVariable int id){
 
-        Caixa caixaEncontrado =caixaService.buscarPorId(id);
+        Caixa caixaEncontrado =caixaService.findById(id);
 
         if (caixaEncontrado == null){
             return ResponseEntity.notFound().build();
         }
 
         if (caixaEncontrado.isStatus() == true){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body("O caixa "+ id +" já está aberto!");
         }
         caixaEncontrado.setStatus(true);
-        return ResponseEntity.ok(caixaService.salvar(caixaEncontrado));
+        caixaService.save(caixaEncontrado);
+        return ResponseEntity.ok("O caixa "+ id +" está aberto!");
     }
 
-    @PutMapping("/fechar")
-    public ResponseEntity<Caixa>fecharCaixa(@RequestBody int id ){
+    @PutMapping("/fechar/{id}")
+    public ResponseEntity<String>fecharCaixa(@PathVariable int id ){
 
-        Caixa caixaEncontrado =caixaService.buscarPorId(id);
+        Caixa caixaEncontrado =caixaService.findById(id);
 
         if (caixaEncontrado == null){
             return ResponseEntity.notFound().build();
         }
 
         if (caixaEncontrado.isStatus() == false){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body("O caixa "+ id +" já está fechado!");
         }
         caixaEncontrado.setStatus(false);
-        return ResponseEntity.ok(caixaService.salvar(caixaEncontrado));
+        caixaService.save(caixaEncontrado);
+        return ResponseEntity.ok("O caixa "+ id +" está aberto!");
     }
 
 

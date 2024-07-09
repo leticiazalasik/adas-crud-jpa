@@ -16,27 +16,22 @@ public class CaixaService {
     @Autowired
     private CaixaRepository caixaRepository;
 
-    List<Double> listaMovimentacao = new ArrayList<>();
-
-    public Caixa salvar(Caixa caixa) {
+    public Caixa save(Caixa caixa) {
         return caixaRepository.save(caixa);
     }
 
-    public List<Caixa> buscarTodos(){
+    public List<Caixa> findAll(){
         return caixaRepository.findAll();
     }
 
-    public Caixa buscarPorId(int id){
+    public Caixa findById(int id){
         return caixaRepository.findById(id).orElse(null);
     }
 
 
-    public void excluir (Caixa caixa){
+    public void delete (Caixa caixa){
         caixaRepository.delete(caixa);
     }
 
-//    public List<Double> registrarMovimentacao (Double valor){
-//        listaMovimentacao.add(valor);
-//        return listaMovimentacao;
 
     }
