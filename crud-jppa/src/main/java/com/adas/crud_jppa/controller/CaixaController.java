@@ -71,11 +71,11 @@ public class CaixaController {
         Caixa caixaEncontrado =caixaService.findById(id);
 
         if (caixaEncontrado == null){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok("O caixa "+ id +" nào foi encontrado!");
         }
 
         if (caixaEncontrado.isStatus() == true){
-            return ResponseEntity.badRequest().body("O caixa "+ id +" já está aberto!");
+            return ResponseEntity.ok("O caixa "+ id +" já está aberto!");
         }
         caixaEncontrado.setStatus(true);
         caixaService.save(caixaEncontrado);
@@ -88,11 +88,11 @@ public class CaixaController {
         Caixa caixaEncontrado =caixaService.findById(id);
 
         if (caixaEncontrado == null){
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.ok("O caixa "+ id +" nào foi encontrado!");
         }
 
         if (caixaEncontrado.isStatus() == false){
-            return ResponseEntity.badRequest().body("O caixa "+ id +" já está fechado!");
+            return ResponseEntity.ok("O caixa "+ id +" já está fechado!");
         }
         caixaEncontrado.setStatus(false);
         caixaService.save(caixaEncontrado);

@@ -34,4 +34,17 @@ public class CaixaService {
     }
 
 
+    public Caixa realizarMovimentacao(int id, Double valor, String acao) {
+        Caixa caixa = findById(id);
+
+        if (acao.equalsIgnoreCase("entrada")) {
+            caixa.setSaldo(caixa.getSaldo() + valor);
+            save(caixa);
+        } else if (acao.equalsIgnoreCase("saida")) {
+            caixa.setSaldo(caixa.getSaldo() - valor);
+            save(caixa);
+        }
+        return save(caixa);
+    }
+
     }
