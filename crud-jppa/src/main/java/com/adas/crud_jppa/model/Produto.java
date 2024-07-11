@@ -1,10 +1,9 @@
 package com.adas.crud_jppa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 
@@ -30,4 +29,10 @@ public class Produto {
     @NonNull
     private Integer quantidade;
 
+    @ManyToOne
+    @JoinColumn(name="categoria_id")
+    private Categoria categoria;
+
+    @ManyToMany(mappedBy = "produtos")
+    private List<Caixa>caixas;
 }

@@ -1,10 +1,9 @@
 package com.adas.crud_jppa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @NoArgsConstructor
 
@@ -27,4 +26,11 @@ public class Caixa {
 
     @NonNull
     private Double limite;
+
+    @ManyToMany
+    @JoinTable(name="caixa_produto",
+            joinColumns = @JoinColumn(name="caixa_id"),
+            inverseJoinColumns = @JoinColumn(name = "produto_id")
+    )
+    private List<Produto> produtos;
 }
