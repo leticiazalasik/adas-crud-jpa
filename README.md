@@ -2,7 +2,8 @@
 
 Este repositório é uma prática feita em sala de aula para exercitar o CRUD com spring e JPA. 
 
-O que esse projeto contém? 
+##O que esse projeto contém? 
+
 :diamond_shape_with_a_dot_inside:Classe categoria com seu CRUD e método buscar por Id. Essa classe possui todos os endpoints de acesso a cada método. 
 :diamond_shape_with_a_dot_inside:Classe Produto com seu CRUD e método buscar por Id, venderProduto, comprarProduto².Essa classe possui todos os endpoints de acesso a cada método. 
 
@@ -27,27 +28,3 @@ O que esse projeto contém?
 Esse projeto foi criado utilizando as tecnologias:
 #### :small_blue_diamond: IntelliJ - JAVA, Spring Boot. 
 #### :small_blue_diamond: H2 - banco de dados relacional <br><br>
-
-
-
-Caixa caixa = caixaService.findById(idCaixa);
-        if (!caixa.isStatus()) {
-            return ResponseEntity.ok("Não foi possível realizar a venda pois o caixa "+ idCaixa + " está fechado.");
-
-        }
-        if (produtoAtual.getQuantidade()<quantidade ) {
-            return ResponseEntity.ok("Estoque insuficiente para venda.");
-        }
-        produtoAtual.setQuantidade(produtoAtual.getQuantidade()-quantidade);
-        produtoService.save(produtoAtual);
-
-        //Valor entrada
-        double valorVenda= produto.getPreco()*quantidade;
-
-        //atualizar o saldo do caixa
-        caixa = caixaService.realizarMovimentacao(idCaixa, valorVenda, "entrada");
-
-        String recibo = "" +
-                "Produto vendido: "+ produtoAtual.getNome() +
-                "\n Valor Total da venda: R$ " + valorVenda +
-                "\n Caixa atualizado: " + idCaixa +
