@@ -5,6 +5,7 @@ import com.adas.crud_jppa.model.Produto;
 import com.adas.crud_jppa.repository.CaixaRepository;
 import com.adas.crud_jppa.service.CaixaService;
 import com.adas.crud_jppa.service.ProdutoService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -100,7 +101,19 @@ public class CaixaController {
     }
 
 
+@GetMapping ("/entradas")
+    public ResponseEntity<String>mostrarEntradas(){
 
+    return ResponseEntity.ok("Entradas: " +  caixaService.mostrarEntradas());
+
+}
+
+    @GetMapping ("/saidas")
+    public ResponseEntity<String>mostrarSaidas(){
+
+        return ResponseEntity.ok("Saidas: " +  caixaService.mostrarSaidas());
+
+    }
 
 }
 

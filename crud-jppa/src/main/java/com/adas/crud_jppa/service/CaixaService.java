@@ -16,6 +16,9 @@ public class CaixaService {
     @Autowired
     private CaixaRepository caixaRepository;
 
+    Double entradas=0.0;
+    Double saidas=0.0;
+
     public Caixa save(Caixa caixa) {
         return caixaRepository.save(caixa);
     }
@@ -40,10 +43,20 @@ public class CaixaService {
         if (acao.equalsIgnoreCase("entrada")) {
             caixa.setSaldo(caixa.getSaldo() + valor);
             save(caixa);
+            entradas=entradas+valor;
         } else if (acao.equalsIgnoreCase("saida")) {
             caixa.setSaldo(caixa.getSaldo() - valor);
             save(caixa);
+            saidas=saidas+valor;
         }
         return save(caixa);
+    }
+
+    public Double mostrarEntradas() {
+    return entradas;
+    }
+
+    public Double mostrarSaidas() {
+        return saidas;
     }
     }
