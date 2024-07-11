@@ -12,6 +12,7 @@ Este repositório é uma prática feita em sala de aula para exercitar o CRUD co
 2- comprarProduto:vê se o caixa existe e se ele está ativo(aberto) e verifica se o produto existe na lista de produtos. Se sim, o estoque do produto aumenta, o saldo do caixa é atualizado e é realizada uma movimentaçao do tipo saída. 
 
 :diamond_shape_with_a_dot_inside:Classe Caixa com seu CRUD e método buscar por Id, , abrirCaixa³, fecharCaixa⁴, mostrarEntradas⁵, mostrarSaidas⁶. Essa classe possui todos os endpoints de acesso a cada método. Na service foi feito o método realizarMovimentacao⁷. 
+
 3-abrirCaixa: Verifica se o caixa existe e se ele está aberto, então atualiza o status para false. 
 
 4- fecharCaixa: Verifica se o caixa existe e se ele está fechado, então atualiza o status para true. 
