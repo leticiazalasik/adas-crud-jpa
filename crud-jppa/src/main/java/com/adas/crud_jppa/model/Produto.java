@@ -35,4 +35,12 @@ public class Produto {
 
     @ManyToMany(mappedBy = "produtos")
     private List<Caixa>caixas;
+
+    @ManyToMany
+    @JoinTable(
+            name="produto_historico",
+            joinColumns = @JoinColumn(name="produto_id"),
+            inverseJoinColumns = @JoinColumn(name="historico_id")
+    )
+    private List<Historico>historicos;
 }
