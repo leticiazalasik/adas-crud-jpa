@@ -2,7 +2,7 @@
 
 Este repositório é uma prática feita em sala de aula para exercitar o CRUD com spring e JPA. 
 
-##O que esse projeto contém? 
+## O que esse projeto contém? 
 
 :diamond_shape_with_a_dot_inside:Classe categoria com seu CRUD e método buscar por Id. Essa classe possui todos os endpoints de acesso a cada método. 
 :diamond_shape_with_a_dot_inside:Classe Produto com seu CRUD e método buscar por Id, venderProduto, comprarProduto².Essa classe possui todos os endpoints de acesso a cada método. 
