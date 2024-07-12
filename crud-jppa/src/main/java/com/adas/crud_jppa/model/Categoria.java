@@ -1,5 +1,6 @@
 package com.adas.crud_jppa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +34,7 @@ public class Categoria {
     @NonNull
     private boolean status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "categoria")
     private List<Produto>produtos;
 
