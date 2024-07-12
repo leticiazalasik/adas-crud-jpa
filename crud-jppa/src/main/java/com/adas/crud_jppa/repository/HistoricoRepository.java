@@ -1,4 +1,7 @@
 package com.adas.crud_jppa.repository;
 
-public interface HistoricoRepository {
+import com.adas.crud_jppa.model.Historico;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface HistoricoRepository extends JpaRepository<Historico, Integer> {
 }
