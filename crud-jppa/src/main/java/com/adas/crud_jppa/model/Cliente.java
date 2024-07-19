@@ -1,5 +1,6 @@
 package com.adas.crud_jppa.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,19 +14,19 @@ import java.util.List;
 
 @Entity
 public class Cliente {
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private Integer id;
-
-        @NonNull
-        private String nome;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
     @NonNull
-    private String email;
+    private String nome;
 
-        @OneToMany(mappedBy = "cliente")
-        private List<Historico>historicos;
+    @NonNull
+    private String cpf;
 
-    }
+    @NonNull
+    private Integer idade;
+
+}
 
 

@@ -59,4 +59,8 @@ public class ClienteController {
         return ResponseEntity.ok(clienteEncontrado);
 
     }
+    //@PostMaping
+    //public ResponseEntity<Historico> findById(@PathVariable int id){
+
+    //}
 }

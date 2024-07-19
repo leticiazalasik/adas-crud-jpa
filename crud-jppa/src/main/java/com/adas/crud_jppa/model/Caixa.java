@@ -27,10 +27,11 @@ public class Caixa {
     @NonNull
     private Double limite;
 
+    //vinculando caixa e produto com varios para varios
     @ManyToMany
     @JoinTable(name="caixa_produto",
             joinColumns = @JoinColumn(name="caixa_id"),
             inverseJoinColumns = @JoinColumn(name = "produto_id")
     )
-    private List<Produto> produtos;
+    private List<Produto> produtosCaixa;
 }

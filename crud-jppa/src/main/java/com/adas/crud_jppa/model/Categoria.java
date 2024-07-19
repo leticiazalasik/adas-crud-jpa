@@ -34,6 +34,7 @@ public class Categoria {
     @NonNull
     private boolean status;
 
+    //Vinculando um único registro da tabela categoria com vários registros da tabela Produto.
     @JsonIgnore
     @OneToMany(mappedBy = "categoria")
     private List<Produto>produtos;

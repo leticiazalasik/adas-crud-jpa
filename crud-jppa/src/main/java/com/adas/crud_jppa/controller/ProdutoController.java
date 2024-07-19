@@ -2,10 +2,14 @@ package com.adas.crud_jppa.controller;
 
 import com.adas.crud_jppa.model.Caixa;
 import com.adas.crud_jppa.model.Categoria;
+import com.adas.crud_jppa.model.Historico;
 import com.adas.crud_jppa.model.Produto;
 import com.adas.crud_jppa.service.CaixaService;
+import com.adas.crud_jppa.service.HistoricoService;
+
 import com.adas.crud_jppa.service.CategoriaService;
 import com.adas.crud_jppa.service.ProdutoService;
+import org.antlr.v4.runtime.misc.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +26,9 @@ public class ProdutoController {
 
    @Autowired
    CaixaService caixaService;
+
+    @Autowired
+    HistoricoService historicoService;
 
     @GetMapping("/todos")
         public ResponseEntity<List<Produto>> findAll() {
@@ -68,36 +75,6 @@ public class ProdutoController {
 
         }
 
-    @PostMapping("/vender/{quantidade}/{idCaixa}")
-    public ResponseEntity<String> venderProduto(@RequestBody  Produto produto, @PathVariable int quantidade, @PathVariable  int idCaixa) {
-
-        //Busca o objeto atualizado no banco de dados com base no id informado no corpo da requisiçao
-        Produto produtoAtual = produtoService.findById(produto.getId());
-    Caixa caixa = caixaService.findById(idCaixa);
-        if (!caixa.isStatus()) {
-            return ResponseEntity.ok("Não foi possível realizar a venda pois o caixa "+ idCaixa + " está fechado.");
-
-        }
-        if (produtoAtual.getQuantidade()<quantidade ) {
-            return ResponseEntity.ok("Estoque insuficiente para venda.");
-        }
-        produtoAtual.setQuantidade(produtoAtual.getQuantidade()-quantidade);
-        produtoService.save(produtoAtual);
-
-        //Valor entrada
-        double valorVenda= produto.getPreco()*quantidade;
-
-        //atualizar o saldo do caixa
-        caixa = caixaService.realizarMovimentacao(idCaixa, valorVenda, "entrada");
-
-        String recibo = "" +
-                "Produto vendido: "+ produtoAtual.getNome() +
-                "\n Valor Total da venda: R$ " + valorVenda +
-                "\n Caixa atualizado: " + idCaixa +
-                "\n Saldo atual do caixa: " + caixa.getSaldo();
-        return ResponseEntity.ok(recibo);
-    }
-
 
     @PostMapping("/comprar/{quantidade}/{idCaixa}")
     public ResponseEntity<String> comprarProduto(@RequestBody  Produto produto, @PathVariable int quantidade, @PathVariable  int idCaixa) {
@@ -132,4 +109,39 @@ public class ProdutoController {
         return ResponseEntity.ok(recibo);
     }
 
+    @PostMapping("/vender/{quantidade}/{idCaixa}")
+    public ResponseEntity<String> venderProduto(@RequestBody  Produto produto, @PathVariable int quantidade, @PathVariable  int idCaixa) {
+
+
+        //Busca o objeto atualizado no banco de dados com base no id informado no corpo da requisiçao
+        Produto produtoAtual = produtoService.findById(produto.getId());
+        Caixa caixa = caixaService.findById(idCaixa);
+        if (!caixa.isStatus()) {
+            return ResponseEntity.ok("Não foi possível realizar a venda pois o caixa "+ idCaixa + " está fechado.");
+
+
+        }
+        if (produtoAtual.getQuantidade()<quantidade ) {
+            return ResponseEntity.ok("Estoque insuficiente para venda.");
+        }
+        produtoAtual.setQuantidade(produtoAtual.getQuantidade()-quantidade);
+        produtoService.save(produtoAtual);
+
+
+        //Valor entrada
+        double valorVenda= produto.getPreco()*quantidade;
+
+
+        //atualizar o saldo do caixa
+        caixa = caixaService.realizarMovimentacao(idCaixa, valorVenda, "entrada");
+
+
+        String recibo = "" +
+                "Produto vendido: "+ produtoAtual.getNome() +
+                "\n Valor Total da venda: R$ " + valorVenda +
+                "\n Caixa atualizado: " + idCaixa +
+                "\n Saldo atual do caixa: " + caixa.getSaldo();
+        return ResponseEntity.ok(recibo);
     }
+
+}

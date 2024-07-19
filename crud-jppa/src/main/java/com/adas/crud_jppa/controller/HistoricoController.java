@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class HistoricoController {
 
     @PostMapping("/novo")
     public ResponseEntity<Historico> cadastrarNovoHistorico(@RequestBody Historico historico) {
-
+historico.setData(LocalDateTime.now());
         return ResponseEntity.ok(historicoService.salvar(historico));
     }
 
