@@ -23,13 +23,11 @@ Este repositório é uma prática feita em sala de aula para exercitar o CRUD co
 
 7- realizarMovimentacao: verifica se o caixa existe pelo id recebido, recebe por parametro tambem a acao - se é entrada ou saída - aqui que é mudado o saldo do caixa e somada as entradas ou saidas o valor dessa movimentação. 
 
-🚧 REPOSITÓRIO EM ANDAMENTO 🚧 ...
-
-
-
-
 
 ## 👨‍💻️ Tecnologias Utilizadas
 Esse projeto foi criado utilizando as tecnologias:
 #### :small_blue_diamond: IntelliJ - JAVA, Spring Boot. 
 #### :small_blue_diamond: H2 - banco de dados relacional <br><br>
+
+🚧 REPOSITÓRIO EM ANDAMENTO 🚧 ...
+
