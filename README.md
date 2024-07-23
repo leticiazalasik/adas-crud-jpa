@@ -29,5 +29,5 @@ Esse projeto foi criado utilizando as tecnologias:
 #### :small_blue_diamond: IntelliJ - JAVA, Spring Boot. 
 #### :small_blue_diamond: H2 - banco de dados relacional <br><br>
 
-🚧 REPOSITÓRIO EM ANDAMENTO 🚧 ...
+🚧 REPOSITÓRIO EM ANDAMENTO 🚧
 
