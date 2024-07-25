@@ -26,7 +26,7 @@ public class Historico {
        private Cliente cliente;
 
 
-        @ManyToMany(mappedBy = "historicos")
+        @ManyToMany
         @JoinTable(
                 name = "registro_venda",
                 joinColumns = @JoinColumn(name = "historico_id"),

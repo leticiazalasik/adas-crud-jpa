@@ -144,4 +144,28 @@ public class ProdutoController {
         return ResponseEntity.ok(recibo);
     }
 
+    @GetMapping("/nome-exato/{nome}")
+    public ResponseEntity<List<Produto>>findByExactNome(@PathVariable String nome){
+        return ResponseEntity.ok(produtoService.findByExactNome(nome));    }
+
+@GetMapping("/nome-similar/{nome}")
+public ResponseEntity<List<Produto>>findBySimilarNome(@PathVariable String nome){
+    return ResponseEntity.ok(produtoService.findBySimilarNome(nome));
+}
+
+    @GetMapping("/preco/{preco}")
+    public ResponseEntity<List<Produto>>findByPreco(@PathVariable Double preco){
+        return ResponseEntity.ok(produtoService.findByPreco(preco));
+    }
+
+    @GetMapping("/produtos-categoria/{categoria}")
+    public ResponseEntity<List<Produto>>findByCategoria(@PathVariable Integer categoria){
+        return ResponseEntity.ok(produtoService.findByCategoria(categoria));
+    }
+
+    @GetMapping("/categoria-ativa/{categoria}")
+    public ResponseEntity<List<Produto>>findByCategoriaAtiva(@PathVariable Integer categoria){
+        return ResponseEntity.ok(produtoService.findByCategoriaAtiva(categoria));
+    }
+
 }

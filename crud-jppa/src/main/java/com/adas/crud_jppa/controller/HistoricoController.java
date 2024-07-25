@@ -37,6 +37,9 @@ historico.setData(LocalDateTime.now());
         return ResponseEntity.ok(historicoService.salvar(historico));
     }
 
+ //   @PostMapping("vender-produtos")
+   // public ResponseEntity<String>registrarVenda(@RequestBody Historico historico) {
+//}
 
     @PutMapping("/{id}")
     public ResponseEntity<Historico>alterar(@RequestBody Historico historico, @PathVariable int id){

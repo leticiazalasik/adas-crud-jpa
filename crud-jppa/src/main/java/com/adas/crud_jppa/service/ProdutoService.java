@@ -38,6 +38,23 @@ public class ProdutoService {
         produtoRepository.delete(produto);
     }
 
+public List<Produto> findByExactNome (String nome){
+        return produtoRepository.findByExactNome(nome);
+    }
+    public List <Produto> findBySimilarNome (String nome){
+        return produtoRepository.findBySimilarNome(nome);
+    }
+
+    public List <Produto> findByPreco (Double preco){
+        return produtoRepository.findByPreco(preco);
+    }
+    public List <Produto> findByCategoria (Integer categoria){
+        return produtoRepository.findByCategoria(categoria);
+    }
+
+    public List <Produto> findByCategoriaAtiva (Integer categoria){
+        return produtoRepository.findByCategoriaAtiva(categoria);
+    }
 
 
 }
