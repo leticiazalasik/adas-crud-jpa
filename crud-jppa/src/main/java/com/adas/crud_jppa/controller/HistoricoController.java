@@ -1,6 +1,7 @@
 package com.adas.crud_jppa.controller;
 
 import com.adas.crud_jppa.model.Historico;
+import com.adas.crud_jppa.model.Produto;
 import com.adas.crud_jppa.service.HistoricoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,7 @@ historico.setData(LocalDateTime.now());
         return ResponseEntity.ok(historicoService.salvar(historico));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/excluir/{id}")
     public ResponseEntity<Historico> excluir (@PathVariable int id){
         Historico historicoEncontrado = historicoService.buscarPorId(id);
 
@@ -61,5 +62,10 @@ historico.setData(LocalDateTime.now());
         historicoService.excluir(historicoEncontrado);
         return ResponseEntity.ok(historicoEncontrado);
 
+    }
+
+    @GetMapping("/todos/relatorio")
+    public ResponseEntity<List<Object[]>> findAll() {
+        return ResponseEntity.ok(historicoService.buscarDetalhesDeTodosOsHistoricos());
     }
 }

@@ -53,7 +53,7 @@ public List<Produto> findByExactNome (String nome){
     }
 
     public List <Produto> findByCategoriaAtiva (Integer categoria){
-        return produtoRepository.findByCategoriaAtiva(categoria);
+        return produtoRepository.findByCategoria(categoria);
     }
 
 
