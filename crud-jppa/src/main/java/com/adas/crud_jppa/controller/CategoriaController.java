@@ -76,5 +76,5 @@ public class CategoriaController {
         return categoriaService.findByStatusTrue();
     }
 
-    
+
 }
