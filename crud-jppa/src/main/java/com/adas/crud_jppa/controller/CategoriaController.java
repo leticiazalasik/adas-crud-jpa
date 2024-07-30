@@ -60,4 +60,21 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaEncontrada);
 
     }
+
+    @GetMapping ("nome/{nome}")
+    public List<Categoria>findByNome(@PathVariable String nome){
+        return categoriaService.findByNome(nome);
+    }
+
+    @GetMapping ("nome-similar/{nome}")
+    public List<Categoria>findByNomeContainingIgnoreCase(@PathVariable String nome){
+        return categoriaService.findByNomeContaining(nome);
+    }
+
+    @GetMapping ("categoria-ativa")
+    public List<Categoria>findByStatusTrue(){
+        return categoriaService.findByStatusTrue();
+    }
+
+    
 }

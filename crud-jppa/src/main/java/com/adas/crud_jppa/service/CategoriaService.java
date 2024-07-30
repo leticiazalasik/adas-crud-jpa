@@ -29,4 +29,15 @@ public class CategoriaService {
         categoriaRepository.delete(categoria);
     }
 
+    public List<Categoria>findByNome(String nome){
+        return categoriaRepository.findByNome(nome);
+    }
+
+    public List<Categoria>findByNomeContaining(String nome){
+        return categoriaRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    public List<Categoria> findByStatusTrue(){
+        return categoriaRepository.findByStatusTrue();
+    }
 }
