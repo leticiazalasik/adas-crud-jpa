@@ -206,4 +206,9 @@ public ResponseEntity<List<Produto>>findBySimilarNome(@PathVariable String nome)
         return ResponseEntity.ok(produtoService.findByCategoria(categoria));
     }
 
+    @GetMapping("/categoria/nome/{nome}")
+    public ResponseEntity<List<Produto>> findProdutosByCategoriaNome(@PathVariable String nome){
+        return ResponseEntity.ok(produtoService.findProdutosByCategoriaNome(nome));
+    }
+
 }
