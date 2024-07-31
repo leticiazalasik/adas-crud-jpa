@@ -6,6 +6,12 @@ width: 30%;
 
 }
 
+.btn-primary:hover {
+    background-color: hsl(263, 83%, 19%); 
+    border: solid hsl(263, 83%, 19%);
+
+}
+
 .body{
     margin-top: 3%;
     /* Alinhar os botões à direita */
