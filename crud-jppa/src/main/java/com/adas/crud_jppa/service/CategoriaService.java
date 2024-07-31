@@ -40,4 +40,10 @@ public class CategoriaService {
     public List<Categoria> findByStatusTrue(){
         return categoriaRepository.findByStatusTrue();
     }
+
+    public int updateCategoriaById (int id, Boolean status) {
+        return categoriaRepository.updateCategoriaById(id, status);
+    }
+
+
 }

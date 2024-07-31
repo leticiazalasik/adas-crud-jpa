@@ -3,6 +3,7 @@ package com.adas.crud_jppa.repository;
 import com.adas.crud_jppa.model.Categoria;
 import com.adas.crud_jppa.model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -22,12 +23,20 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     List<Produto> findByCategoria(@Param("CATEGORIA_ID") Integer categoriaId);
 
     //EXEMPLO DE SELECT UTILIZANDO SQL NATIVA COM JOIN
+    @Query (value = "SELECT p.id, p.nome, p.preco, p.quantidade, p.categoria_id " +
+            "FROM Produto p " +
+            "INNER JOIN categoria c ON p.categoria_id = c.id " +
+            "WHERE c.nome ILIKE :CATEGORIA_NOME", nativeQuery = true)
+    List<Produto> findProdutosByCategoriaNome(@Param("CATEGORIA_NOME") String categoriaNome);
 
-@Query ("SELECT p " +
-        "FROM Produto p " +
-        "JOIN categoria c " +
-        "WHERE c.nome ILIKE :CATEGORIA_NOME")
-List<Produto> findProdutosByCategoriaNome(@Param("CATEGORIA_NOME") String categoriaNome);
+
+
+    //EXEMPLO USANDO JPQA
+//@Query ("SELECT p " +
+//        "FROM Produto p " +
+ //       "JOIN categoria c " +
+//        "WHERE c.nome ILIKE :CATEGORIA_NOME")
+//List<Produto> findProdutosByCategoriaNome(@Param("CATEGORIA_NOME") String categoriaNome);
 }
 
 //Esse integrer é a chave primária
