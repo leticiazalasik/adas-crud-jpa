@@ -1,0 +1,21 @@
+.btn-primary{
+background-color: rgb(0, 153, 94);
+border: solid rgb(0, 153, 94);
+margin-right: 1%;
+width: 30%;
+
+}
+
+.body{
+    margin-top: 3%;
+    /* Alinhar os botões à direita */
+    text-align: right;
+    margin-right: 1%;
+width: 60%;
+
+}
+
+.body {
+    position: absolute;
+    right: 0;
+}
