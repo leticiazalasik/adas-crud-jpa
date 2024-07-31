@@ -7,6 +7,7 @@ import { HeaderComponent } from './Components/header/header.component';
 import { TitleComponentComponent } from './Components/title-component/title-component.component';
 import { MenuProdutoComponentComponent } from './Components/menu-produto-component/menu-produto-component.component';
 import { MenuGeralComponentComponent } from './Components/menu-geral-component/menu-geral-component.component';
+import { TelaResultadosComponentComponent } from './Components/tela-resultados-component/tela-resultados-component.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MenuGeralComponentComponent } from './Components/menu-geral-component/m
     HeaderComponent,
     TitleComponentComponent,
     MenuProdutoComponentComponent,
-    MenuGeralComponentComponent
+    MenuGeralComponentComponent,
+    TelaResultadosComponentComponent
   ],
   imports: [
     BrowserModule,
